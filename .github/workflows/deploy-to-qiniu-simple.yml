@@ -23,7 +23,8 @@ jobs:
       
       - name: Configure qshell
         run: |
-          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }}
+          mkdir -p ~/.qshell
+          qshell account ${{ secrets.QINIU_ACCESS_KEY }} ${{ secrets.QINIU_SECRET_KEY }} default
       
       - name: Upload files to Qiniu
         run: |
