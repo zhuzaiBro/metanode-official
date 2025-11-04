@@ -30,6 +30,7 @@ jobs:
         run: |
           qshell account pCRn0GGvIoR6FbZChjcK_nR6Z4LcK35mN3nWrITK avnFViTMQE7JmkonEDGkNnLsgptFlLjEIpiYxhms meta-node
           qshell buckets
+          qshell qupload2 --src-dir=./ --bucket=meta-node --key-prefix="" --overwrite=true 
           
       
 
