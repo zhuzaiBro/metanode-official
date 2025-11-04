@@ -27,34 +27,8 @@ jobs:
           QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
           QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          mkdir -p ~/.qshell
-          cat > ~/.qshell/account.json << EOF
-          {
-            "default": {
-              "access_key": "$QINIU_ACCESS_KEY",
-              "secret_key": "$QINIU_SECRET_KEY"
-            }
-          }
-          EOF
-          cat > /tmp/qiniu-upload-config.json << EOF
-          {
-            "src_dir": ".",
-            "bucket": "$QINIU_BUCKET",
-            "key_prefix": "",
-            "overwrite": true,
-            "ignore_dir": [".git", ".github", "node_modules"],
-            "ignore_suffixes": [".md", ".log"],
-            "skip_path_prefixes": [],
-            "skip_fixed_strings": [],
-            "skip_suffixes": []
-          }
-          EOF
-          qshell qupload2 /tmp/qiniu-upload-config.json
+          chmod +x qshell
+          qshell account $QINIU_ACCESS_KEY $QINIU_SECRET_KEY ROOT
+          
       
-      - name: Refresh CDN cache (optional)
-        env:
-          CDN_URL: ${{ secrets.QINIU_CDN_URL }}
-        if: env.CDN_URL != ''
-        run: |
-          qshell cdnrefresh --urls "${{ env.CDN_URL }}"
 
