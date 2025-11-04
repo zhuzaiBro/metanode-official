@@ -36,13 +36,20 @@ jobs:
             }
           }
           EOF
-          qshell qupload2 \
-            --src-dir=./ \
-            --bucket=$QINIU_BUCKET \
-            --key-prefix="" \
-            --overwrite=true \
-            --ignore-dir=.git,.github,node_modules \
-            --ignore-suffixes=.md,.log
+          cat > /tmp/qiniu-upload-config.json << EOF
+          {
+            "src_dir": ".",
+            "bucket": "$QINIU_BUCKET",
+            "key_prefix": "",
+            "overwrite": true,
+            "ignore_dir": [".git", ".github", "node_modules"],
+            "ignore_suffixes": [".md", ".log"],
+            "skip_path_prefixes": [],
+            "skip_fixed_strings": [],
+            "skip_suffixes": []
+          }
+          EOF
+          qshell qupload2 /tmp/qiniu-upload-config.json
       
       - name: Refresh CDN cache (optional)
         env:
