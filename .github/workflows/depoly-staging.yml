@@ -29,9 +29,9 @@ jobs:
           QINIU_SECRET_KEY: ${{ secrets.QINIU_SECRET_KEY }}
           QINIU_BUCKET: ${{ secrets.QINIU_BUCKET }}
         run: |
-          qshell account pCRn0GGvIoR6FbZChjcK_nR6Z4LcK35mN3nWrITK avnFViTMQE7JmkonEDGkNnLsgptFlLjEIpiYxhms meta-node
+          qshell account pCRn0GGvIoR6FbZChjcK_nR6Z4LcK35mN3nWrITK avnFViTMQE7JmkonEDGkNnLsgptFlLjEIpiYxhms metanode-staging
           qshell buckets
-          qshell qupload2 --src-dir=./ --bucket=meta-node --key-prefix="" --overwrite=true 
+          qshell qupload2 --src-dir=./ --bucket=metanode-staging --key-prefix="" --overwrite=true 
           
       
 
